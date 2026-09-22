@@ -1,14 +1,15 @@
 /* ==========================================================================
-   FLORES AMARILLAS - INTERACTIVE SCRIPT
+   FLORES AMARILLAS - DEDICATORIA PERSONAL (INTERACTIVE SCRIPT)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
   initPetalCanvas();
   initScrollReveal();
-  initLetterCustomizer();
+  initSurpriseButton();
+  initEditorModal();
   initAudioPlayer();
-  initGardenInteractions();
-  checkURLParameters();
+  initPhotoUploader();
+  loadURLParameters();
 });
 
 /* --------------------------------------------------------------------------
@@ -27,20 +28,19 @@ function initPetalCanvas() {
     height = canvas.height = window.innerHeight;
   });
 
-  const petalsCount = 32;
+  const petalsCount = 28;
   const petals = [];
-
   const petalColors = ['#FFD84D', '#F6C900', '#FFF4C4', '#FFEAA5', '#E5B800'];
 
   for (let i = 0; i < petalsCount; i++) {
     petals.push({
       x: Math.random() * width,
       y: Math.random() * height - height,
-      size: Math.random() * 12 + 8,
-      speedY: Math.random() * 1.5 + 0.8,
-      speedX: Math.random() * 0.8 - 0.4,
+      size: Math.random() * 11 + 7,
+      speedY: Math.random() * 1.4 + 0.7,
+      speedX: Math.random() * 0.7 - 0.35,
       rotation: Math.random() * 360,
-      rotationSpeed: Math.random() * 2 - 1,
+      rotationSpeed: Math.random() * 1.8 - 0.9,
       color: petalColors[Math.floor(Math.random() * petalColors.length)],
       opacity: Math.random() * 0.5 + 0.4
     });
@@ -53,7 +53,6 @@ function initPetalCanvas() {
     ctx.globalAlpha = p.opacity;
     ctx.fillStyle = p.color;
 
-    // Organic petal shape formula
     ctx.beginPath();
     ctx.moveTo(0, 0);
     ctx.bezierCurveTo(-p.size / 2, -p.size, -p.size, p.size / 3, 0, p.size);
@@ -65,10 +64,9 @@ function initPetalCanvas() {
 
   function render() {
     ctx.clearRect(0, 0, width, height);
-
     petals.forEach(p => {
       p.y += p.speedY;
-      p.x += Math.sin(p.y * 0.01) * 0.6 + p.speedX;
+      p.x += Math.sin(p.y * 0.01) * 0.5 + p.speedX;
       p.rotation += p.rotationSpeed;
 
       if (p.y > height + 20) {
@@ -78,7 +76,6 @@ function initPetalCanvas() {
 
       drawPetal(p);
     });
-
     requestAnimationFrame(render);
   }
 
@@ -94,10 +91,10 @@ function initScrollReveal() {
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.15
+    threshold: 0.12
   };
 
-  const observer = new IntersectionObserver((entries, obs) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
@@ -109,87 +106,159 @@ function initScrollReveal() {
 }
 
 /* --------------------------------------------------------------------------
-   3. LETTER CUSTOMIZER & DEDICATION MODAL
+   3. SECCIÓN 08 — SORPRESA INTERACTIVA (Una flor por cada sonrisa...)
    -------------------------------------------------------------------------- */
-function initLetterCustomizer() {
-  const modal = document.getElementById('customize-modal');
-  const btnOpen = document.getElementById('open-modal-btn');
-  const btnClose = document.getElementById('close-modal-btn');
-  const btnSave = document.getElementById('save-letter-btn');
+function initSurpriseButton() {
+  const btnSurprise = document.getElementById('btn-surprise');
+  const surpriseBox = document.getElementById('surprise-box');
+  const bloomGarden = document.getElementById('bloom-garden');
 
-  const recipientInput = document.getElementById('input-recipient');
-  const messageInput = document.getElementById('input-message');
-  const senderInput = document.getElementById('input-sender');
+  if (!btnSurprise || !surpriseBox || !bloomGarden) return;
 
-  const recipientDisplay = document.getElementById('letter-recipient-display');
-  const messageDisplay = document.getElementById('letter-message-display');
-  const senderDisplay = document.getElementById('letter-sender-display');
+  btnSurprise.addEventListener('click', () => {
+    surpriseBox.classList.add('active');
+    bloomGarden.innerHTML = '';
+
+    const flowers = ['🌼', '🌻', '🌷', '🌼', '☀️', '🌼', '🌻', '✨'];
+    
+    flowers.forEach((flowerSymbol, index) => {
+      setTimeout(() => {
+        const flowerEl = document.createElement('span');
+        flowerEl.textContent = flowerSymbol;
+        flowerEl.style.cssText = `
+          display: inline-block;
+          transform: scale(0);
+          transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        `;
+        bloomGarden.appendChild(flowerEl);
+
+        requestAnimationFrame(() => {
+          flowerEl.style.transform = 'scale(1.2)';
+          setTimeout(() => flowerEl.style.transform = 'scale(1)', 200);
+        });
+      }, index * 220);
+    });
+
+    btnSurprise.style.transform = 'scale(0.95)';
+    setTimeout(() => btnSurprise.style.transform = 'scale(1)', 150);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   4. EDITOR MODAL & PERSONALIZACIÓN DE DEDICATORIA
+   -------------------------------------------------------------------------- */
+function initEditorModal() {
+  const modal = document.getElementById('editor-modal');
+  const btnOpen = document.getElementById('open-editor-btn');
+  const btnClose = document.getElementById('close-editor-btn');
+  const btnCloseX = document.getElementById('close-modal-x');
+  const btnSave = document.getElementById('save-editor-btn');
+
+  const inputRecipient = document.getElementById('edit-recipient');
+  const inputSender = document.getElementById('edit-sender');
+  const inputLetter = document.getElementById('edit-letter');
 
   if (btnOpen && modal) {
-    btnOpen.addEventListener('click', () => {
-      modal.classList.add('active');
-    });
+    btnOpen.addEventListener('click', () => modal.classList.add('active'));
   }
 
-  if (btnClose && modal) {
-    btnClose.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-  }
-
+  const closeModal = () => modal.classList.remove('active');
+  if (btnClose) btnClose.addEventListener('click', closeModal);
+  if (btnCloseX) btnCloseX.addEventListener('click', closeModal);
   if (modal) {
     modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('active');
+      if (e.target === modal) closeModal();
     });
   }
 
   if (btnSave) {
     btnSave.addEventListener('click', () => {
-      const recipient = recipientInput.value.trim() || 'ti';
-      const message = messageInput.value.trim() || 'Hoy quería regalarte algo diferente...';
-      const sender = senderInput.value.trim() || 'Con cariño';
+      const recipient = inputRecipient.value.trim() || 'ti';
+      const sender = inputSender.value.trim() || '[Tu nombre]';
+      const letterText = inputLetter.value.trim();
 
-      if (recipientDisplay) recipientDisplay.textContent = `Para ${recipient}.`;
-      if (messageDisplay) messageDisplay.textContent = `“${message}”`;
-      if (senderDisplay) senderDisplay.textContent = `— ${sender}`;
+      updateDedicationUI(recipient, sender, letterText);
 
-      modal.classList.remove('active');
-
-      // Update URL parameters for sharing
+      // Save to URL search params
       const url = new URL(window.location.href);
       url.searchParams.set('para', recipient);
-      url.searchParams.set('mensaje', message);
       url.searchParams.set('de', sender);
+      if (letterText) url.searchParams.set('carta', letterText);
+
       window.history.replaceState({}, '', url);
 
-      showToast('¡Carta actualizada y lista para compartir!');
+      closeModal();
+      showToast('✨ ¡Dedicatoria actualizada!');
     });
   }
 }
 
-function checkURLParameters() {
+function updateDedicationUI(recipient, sender, letterText) {
+  const headerTag = document.getElementById('header-to-tag');
+  const letterSalutation = document.getElementById('letter-salutation');
+  const signatureDisplay = document.getElementById('signature-name-display');
+  const letterBody = document.getElementById('letter-content-body');
+
+  if (headerTag) {
+    headerTag.innerHTML = `Para <span>${recipient}</span>`;
+  }
+  if (letterSalutation) {
+    letterSalutation.textContent = `Para ${recipient}:`;
+  }
+  if (signatureDisplay) {
+    signatureDisplay.textContent = sender;
+  }
+  if (letterText && letterBody) {
+    // Split text into paragraphs
+    const paragraphs = letterText.split('\n\n').filter(p => p.trim());
+    letterBody.innerHTML = paragraphs.map(p => `<p>${escapeHTML(p)}</p>`).join('');
+  }
+}
+
+function loadURLParameters() {
   const urlParams = new URLSearchParams(window.location.search);
   const para = urlParams.get('para');
-  const mensaje = urlParams.get('mensaje');
   const de = urlParams.get('de');
+  const carta = urlParams.get('carta');
 
-  const recipientDisplay = document.getElementById('letter-recipient-display');
-  const messageDisplay = document.getElementById('letter-message-display');
-  const senderDisplay = document.getElementById('letter-sender-display');
-
-  if (para && recipientDisplay) recipientDisplay.textContent = `Para ${para}.`;
-  if (mensaje && messageDisplay) messageDisplay.textContent = `“${mensaje}”`;
-  if (de && senderDisplay) senderDisplay.textContent = `— ${de}`;
+  if (para || de || carta) {
+    updateDedicationUI(para || 'ti', de || '[Tu nombre]', carta);
+  }
 }
 
 /* --------------------------------------------------------------------------
-   4. COPY SHARE LINK & EXTRA EFFECTS
+   5. PHOTO UPLOADER FOR POLAROID FRAME
    -------------------------------------------------------------------------- */
-window.copyShareLink = function() {
+function initPhotoUploader() {
+  const fileInput = document.getElementById('edit-photo-input');
+  const polaroidImg = document.getElementById('polaroid-img');
+  const polaroidBox = document.getElementById('polaroid-box');
+  const placeholder = document.getElementById('polaroid-placeholder');
+
+  if (fileInput && polaroidImg) {
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          polaroidImg.src = event.target.result;
+          polaroidImg.style.display = 'block';
+          if (placeholder) placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. SHARE GIFT LINK & TOAST NOTIFICATION
+   -------------------------------------------------------------------------- */
+window.copyGiftLink = function() {
   navigator.clipboard.writeText(window.location.href).then(() => {
-    showToast('✨ Enlace copiado al portapapeles. ¡Mándalo a tu persona especial!');
+    showToast('✨ Enlace de dedicatoria copiado. ¡Mándalo a tu persona especial!');
   }).catch(() => {
-    showToast('Flores listas para regalar 🌼');
+    showToast('Flores amarillas listas para regalar 🌼');
   });
 };
 
@@ -213,6 +282,8 @@ function showToast(message) {
       z-index: 9999;
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       border: 1px solid #FFD84D;
+      text-align: center;
+      max-width: 90%;
     `;
     document.body.appendChild(toast);
   }
@@ -225,7 +296,7 @@ function showToast(message) {
 }
 
 /* --------------------------------------------------------------------------
-   5. AMBIENT AUDIO PLAYER (Web Audio API Synthesizer)
+   7. AMBIENT AUDIO PLAYER (Web Audio API Synthesizer)
    -------------------------------------------------------------------------- */
 let audioCtx = null;
 let isPlayingAudio = false;
@@ -248,16 +319,16 @@ function initAudioPlayer() {
 
     if (isPlayingAudio) {
       btn.innerHTML = '🔊 <span>Música Entorno</span>';
-      playAmbientArpeggio();
+      playAmbientNotes();
     } else {
-      btn.innerHTML = '🎵 <span>Música Entorno</span>';
+      btn.innerHTML = '♫ <span>Escuchar</span>';
       if (audioTimer) clearInterval(audioTimer);
     }
   });
 }
 
-function playAmbientArpeggio() {
-  // Harmonic warm frequencies inspired by warm sunlight (F Major 9 / C Major 9)
+function playAmbientNotes() {
+  // Delicate warm acoustic frequencies
   const notes = [261.63, 329.63, 392.00, 523.25, 659.25, 523.25, 392.00, 329.63];
   let noteIdx = 0;
 
@@ -271,28 +342,27 @@ function playAmbientArpeggio() {
     osc.frequency.setValueAtTime(notes[noteIdx % notes.length], audioCtx.currentTime);
 
     gain.gain.setValueAtTime(0, audioCtx.currentTime);
-    gain.gain.linearRampToValueAtTime(0.04, audioCtx.currentTime + 0.2);
-    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+    gain.gain.linearRampToValueAtTime(0.035, audioCtx.currentTime + 0.25);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.8);
 
     osc.connect(gain);
     gain.connect(audioCtx.destination);
 
     osc.start();
-    osc.stop(audioCtx.currentTime + 2.6);
+    osc.stop(audioCtx.currentTime + 2.9);
 
     noteIdx++;
-  }, 900);
+  }, 950);
 }
 
-/* --------------------------------------------------------------------------
-   6. GARDEN INTERACTION EFFECTS
-   -------------------------------------------------------------------------- */
-function initGardenInteractions() {
-  const cards = document.querySelectorAll('.flower-card');
-  cards.forEach(card => {
-    card.addEventListener('click', () => {
-      const flowerName = card.querySelector('.flower-name')?.textContent || 'esta flor';
-      showToast(`✨ Escogiste ${flowerName} para tu jardín.`);
-    });
-  });
+function escapeHTML(str) {
+  return str.replace(/[&<>'"]/g, 
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag] || tag)
+  );
 }

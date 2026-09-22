@@ -3,8 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flores Amarillas · Día de las Flores Amarillas (21 de Septiembre)</title>
-  <meta name="description" content="Una experiencia digital especial creada para regalar flores amarillas como símbolo de cariño, ilusión, amistad, amor y luz.">
+  <title>Flores Amarillas · Para ti 🌼</title>
+  <meta name="description" content="Un pequeño lugar donde las flores amarillas siempre están floreciendo. Una dedicatoria personal para el 21 de septiembre.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- CSS Stylesheet -->
   <link rel="stylesheet" href="styles.css">
@@ -17,210 +22,235 @@
 
   <!-- Minimal Header -->
   <header class="site-header">
-    <a href="#" class="brand-logo">
-      <span class="brand-flower">🌼</span> Flores Amarillas
-    </a>
-    <div style="display: flex; align-items: center; gap: 1rem;">
-      <div class="header-date-tag">21 · 09</div>
-      <button class="audio-toggle-btn" id="audio-toggle-btn">🎵 <span>Música Entorno</span></button>
+    <div class="header-left">
+      <span class="brand-flower">🌼</span>
+    </div>
+    <div class="header-right">
+      <span class="header-to-tag" id="header-to-tag">Para <span class="recipient-name-inline">alguien especial</span></span>
+      <button class="audio-toggle-btn" id="audio-toggle-btn" title="Activar música de fondo">
+        ♫ <span>Escuchar</span>
+      </button>
     </div>
   </header>
 
-  <!-- 01 HERO SECTION -->
-  <section class="hero-section">
-    <div class="container hero-grid">
-      <div class="hero-content reveal">
-        <span class="eyebrow">21 de septiembre · Día de las Flores Amarillas</span>
-        <h1 class="hero-title">
-          Flores amarillas<br>
-          para <span class="highlight-flower">alguien especial.</span>
-        </h1>
-        <p class="hero-subtext">
-          Porque algunos detalles no necesitan una razón complicada. A veces una flor basta para decir “pensé en ti” y llenar el día de luz.
-        </p>
-        <a href="#jardin" class="btn-cta">
-          Descubre tu jardín <span class="btn-icon">↓</span>
-        </a>
-      </div>
+  <!-- SECCIÓN 01 — PORTADA -->
+  <section class="cover-section">
+    <div class="container cover-content">
+      <div class="hero-flower-icon">🌼</div>
+      <h1 class="cover-title">Tengo algo para ti.</h1>
+      <p class="cover-hint">Antes de seguir, desliza despacio ↓</p>
+    </div>
+  </section>
 
-      <div class="hero-visual-wrapper reveal">
-        <div class="hero-flower-card">
-          <img src="assets/hero_flower.jpg" alt="Flor Amarilla Protagonista" class="hero-flower-img">
+  <!-- SECCIÓN 02 — PRIMER MENSAJE (Staggered Reveals) -->
+  <section class="message-stagger-section">
+    <div class="container message-stagger-container">
+      <div class="stagger-phrase reveal">Hoy es 21 de septiembre.</div>
+      <div class="stagger-pause reveal">✦</div>
+      <div class="stagger-phrase reveal">Y dicen que hoy se regalan flores amarillas...</div>
+      <div class="stagger-pause reveal">✦</div>
+      <div class="stagger-phrase highlight-phrase reveal">Así que pensé en ti.</div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 03 — FLORES -->
+  <section class="flowers-reveal-section">
+    <div class="container flowers-container">
+      <div class="section-badge reveal">🌼 Un detalle permanente</div>
+      <h2 class="section-headline reveal">Estas son para ti.</h2>
+      <p class="section-subtext reveal">
+        Quizá no duren para siempre en un florero, pero este lugar puede quedarse aquí todo el tiempo que quieras.
+      </p>
+
+      <div class="flowers-showcase reveal">
+        <div class="flower-hero-frame">
+          <img src="assets/hero_flower.jpg" alt="Flor Amarilla de Regalo" class="flower-hero-img">
+          <div class="flower-frame-caption">Para llenar tus días de luz ☀️</div>
         </div>
-        <div class="floating-badge">
-          <span class="badge-icon">🌻</span>
-          <div class="badge-text">
-            Un detalle digital<br>
-            pensado para ti
-          </div>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- 02 MEANING SECTION -->
-  <section class="meaning-section">
-    <div class="container reveal">
-      <span class="eyebrow">El lenguaje del amarillo</span>
-      <h2 class="meaning-title">No son solamente flores.</h2>
-      <div class="words-cloud">
-        <div class="meaning-word"><span class="word-icon">☀️</span> ALEGRÍA</div>
-        <div class="meaning-word"><span class="word-icon">💛</span> CARIÑO</div>
-        <div class="meaning-word"><span class="word-icon">🤝</span> AMISTAD</div>
-        <div class="meaning-word"><span class="word-icon">✨</span> ESPERANZA</div>
-        <div class="meaning-word"><span class="word-icon">🌼</span> AMOR</div>
-        <div class="meaning-word"><span class="word-icon">🌱</span> NUEVOS COMIENZOS</div>
-        <div class="meaning-word"><span class="word-icon">🌟</span> BUENOS DESEOS</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 EMOTIONAL MESSAGE (PAUSE) -->
-  <section class="pause-section">
-    <div class="container reveal">
-      <div class="quote-box">
-        <p class="pause-quote">
-          “Hay personas que hacen que nuestros días se sientan un poco más amarillos, más cálidos y llenos de luz.”
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 04 INTERACTIVE GARDEN -->
-  <section class="garden-section" id="jardin">
+  <!-- SECCIÓN 04 — PEQUEÑAS RAZONES -->
+  <section class="reasons-section">
     <div class="container">
-      <div class="garden-header reveal">
-        <span class="eyebrow">Tu colección floral</span>
-        <h2 class="section-title">Un pequeño jardín para ti.</h2>
-        <p class="section-subtitle">Haz clic en cada flor para descubrir la emoción que lleva contigo.</p>
-      </div>
+      <div class="section-badge reveal">✨ Pequeños detalles</div>
+      <h2 class="section-headline reveal">Y también quería recordarte algunas cosas.</h2>
 
-      <div class="garden-grid">
-        <!-- Card 1 -->
-        <div class="flower-card reveal">
-          <div class="flower-card-img-wrapper">
-            <img src="assets/sunflower.jpg" alt="Girasol Dorado" class="flower-card-img">
-          </div>
-          <h3 class="flower-name">Girasol Dorado</h3>
-          <div class="flower-symbolism">Luz & Vitalidad</div>
-          <p class="flower-desc">
-            Como los soles que iluminan cada mañana sin pedir nada a cambio, recordando siempre buscar lo positivo.
-          </p>
+      <div class="reasons-grid">
+        <div class="reason-card reveal">
+          <span class="reason-number">01</span>
+          <p class="reason-text" id="reason-1-text">Tu forma de hacer reír sin darte cuenta.</p>
         </div>
 
-        <!-- Card 2 -->
-        <div class="flower-card reveal">
-          <div class="flower-card-img-wrapper">
-            <img src="assets/tulip.jpg" alt="Tulipán Amarillo" class="flower-card-img">
-          </div>
-          <h3 class="flower-name">Tulipán de Septiembre</h3>
-          <div class="flower-symbolism">Ilusión & Frescura</div>
-          <p class="flower-desc">
-            Una pincelada de primavera que trae presagios de días felices y momentos compartidos con ternura.
-          </p>
+        <div class="reason-card reveal">
+          <span class="reason-number">02</span>
+          <p class="reason-text" id="reason-2-text">Las conversaciones que se alargan y hacen que el tiempo pase volando.</p>
         </div>
 
-        <!-- Card 3 -->
-        <div class="flower-card reveal">
-          <div class="flower-card-img-wrapper">
-            <img src="assets/hero_flower.jpg" alt="Rosa Amarilla" class="flower-card-img">
-          </div>
-          <h3 class="flower-name">Rosa de Cálida Luz</h3>
-          <div class="flower-symbolism">Cariño & Conexión</div>
-          <p class="flower-desc">
-            La elegancia de la compañía sincera y los abrazos que reconfortan el corazón.
-          </p>
+        <div class="reason-card reveal">
+          <span class="reason-number">03</span>
+          <p class="reason-text" id="reason-3-text">Esos pequeños momentos tranquilos que terminan siendo los mejores.</p>
         </div>
 
-        <!-- Card 4 -->
-        <div class="flower-card reveal">
-          <div class="flower-card-img-wrapper">
-            <img src="assets/bouquet.jpg" alt="Ramillete Silvestre" class="flower-card-img">
-          </div>
-          <h3 class="flower-name">Ramillete Silvestre</h3>
-          <div class="flower-symbolism">Gratitud & Esperanza</div>
-          <p class="flower-desc">
-            Pequeños detalles reunidos que florecen en grandes recuerdos imborrables.
-          </p>
+        <div class="reason-card reveal">
+          <span class="reason-number">04</span>
+          <p class="reason-text" id="reason-4-text">La manera en que haces que ciertos días se sientan un poco más bonitos.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 05 DEDICATION LETTER -->
+  <!-- SECCIÓN 05 — MOMENTO PERSONALIZABLE (POLAROID) -->
+  <section class="polaroid-section">
+    <div class="container">
+      <div class="polaroid-wrapper reveal">
+        <div class="polaroid-frame">
+          <div class="polaroid-img-box" id="polaroid-box">
+            <img src="assets/sunflower.jpg" alt="Fotografía Especial" id="polaroid-img" class="polaroid-img">
+            <div class="polaroid-placeholder" id="polaroid-placeholder" style="display: none;">
+              <span>📸</span>
+              <p>[Nuestra foto aquí]</p>
+            </div>
+          </div>
+          <div class="polaroid-caption" id="polaroid-caption-text">
+            De todos los momentos, este siempre me hace sonreír.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 06 — MENSAJE CENTRAL (Pausa Emocional) -->
+  <section class="central-quote-section">
+    <div class="container reveal">
+      <div class="central-quote-box">
+        <p class="central-quote-main">
+          “Hay personas que llegan sin hacer demasiado ruido y terminan haciendo nuestros días mucho más bonitos.”
+        </p>
+        <p class="central-quote-sub">
+          Gracias por ser una de ellas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 07 — CARTA PERSONAL -->
   <section class="letter-section">
     <div class="container reveal">
       <div class="letter-card">
-        <div class="letter-corner-flower">🌼</div>
+        <div class="letter-corner">🌼</div>
         <div class="letter-header">
-          <div class="letter-to" id="letter-recipient-display">Para ti.</div>
-          <div class="letter-date">21 · 09 · 2026</div>
+          <h3 class="letter-salutation" id="letter-salutation">Para ti:</h3>
+          <span class="letter-date-stamp">21 · 09 · 2026</span>
         </div>
-        <div class="letter-body" id="letter-message-display">
-          “Hoy quería regalarte algo diferente. No solamente flores amarillas, sino un pequeño recordatorio de que hay personas capaces de hacer nuestros días más bonitos simplemente estando presentes. Espero que este pequeño jardín digital te saque una sonrisa.”
+
+        <div class="letter-content" id="letter-content-body">
+          <p>
+            Tal vez regalar flores amarillas sea una pequeña tradición, pero quería aprovecharla para recordarte algo.
+          </p>
+          <p>
+            Me alegra mucho haber coincidido contigo en este pedacito de vida.
+          </p>
+          <p>
+            Gracias por las conversaciones, las risas, los momentos y todas esas pequeñas cosas que quizá parecen normales, pero que terminan haciendo toda la diferencia.
+          </p>
+          <p>
+            No sé cuánto duren unas flores reales en un florero... así que preferí dejarte estas aquí para que puedas volver cuando quieras.
+          </p>
         </div>
+
         <div class="letter-footer">
-          <div class="letter-sign" id="letter-sender-display">— Con todo mi cariño</div>
-          <button class="btn-customize" id="open-modal-btn">✏️ Personalizar carta</button>
+          <span class="letter-valediction">Feliz 21 de septiembre. 🌼</span>
+          <button class="btn-customize-inline" id="open-editor-btn">✏️ Personalizar dedicatoria</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 06 EDITORIAL QUOTE -->
-  <section class="quote-editorial-section">
-    <div class="container reveal">
-      <div class="editorial-layout">
-        <h2 class="editorial-text">
-          Que nunca te falten <span class="yellow-accent-text">flores</span>, motivos ni <span class="yellow-accent-text">personas</span> que iluminen tus días.
-        </h2>
+  <!-- SECCIÓN 08 — SORPRESA INTERACTIVA -->
+  <section class="surprise-section">
+    <div class="container reveal text-center">
+      <h3 class="surprise-title">Un pequeño detalle más...</h3>
+      <button class="btn-surprise" id="btn-surprise">
+        <span>Tengo una última cosa para ti</span> 🌼
+      </button>
+      
+      <div class="surprise-reveal-box" id="surprise-box">
+        <div class="bloom-garden-container" id="bloom-garden"></div>
+        <p class="surprise-message" id="surprise-message">
+          Una flor por cada sonrisa que espero sacarte hoy. ✨
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- 07 FINAL MOMENT -->
-  <section class="final-section">
-    <div class="container reveal">
-      <div class="final-bouquet-wrapper">
-        <img src="assets/bouquet.jpg" alt="Gran Ramillete de Flores Amarillas" class="final-bouquet-img">
+  <!-- SECCIÓN 09 — RAMO FINAL -->
+  <section class="final-bouquet-section">
+    <div class="container reveal text-center">
+      <div class="bouquet-arch-card">
+        <img src="assets/bouquet.jpg" alt="Ramo de Flores Amarillas" class="bouquet-img">
       </div>
-      <h2 class="final-title">Estas flores son para ti. 🌼</h2>
-      <p class="final-subtext">Feliz Día de las Flores Amarillas.</p>
 
-      <div class="final-actions">
-        <button class="btn-cta" onclick="copyShareLink()">Regalar este jardín ✨</button>
-        <button class="btn-secondary" onclick="document.getElementById('open-modal-btn').click()">Personalizar Dedicatoria ✏️</button>
+      <h2 class="final-headline">Feliz Día de las Flores Amarillas.</h2>
+      <p class="final-tagline">Estas sí son solamente para ti.</p>
+      <div class="big-flower-symbol">🌼</div>
+
+      <div class="share-actions">
+        <button class="btn-share" onclick="copyGiftLink()">
+          ✨ Copiar Enlace de Regalo
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('open-editor-btn').click()">
+          ✏️ Modificar Nombres o Mensaje
+        </button>
       </div>
     </div>
   </section>
 
-  <!-- 08 FOOTER -->
-  <footer class="site-footer">
-    <div class="container footer-content">
-      <p class="footer-text">Hecho con cariño y muchas flores amarillas.</p>
-      <div class="footer-date-tag">21 · 09</div>
-    </div>
-  </footer>
+  <!-- SECCIÓN 10 — FIRMA & FOOTER -->
+  <section class="signature-section">
+    <div class="container text-center reveal">
+      <p class="signature-valediction">Con cariño,</p>
+      <h3 class="signature-name" id="signature-name-display">[Tu nombre]</h3>
+      <div class="signature-date">21 · 09 · 2026</div>
 
-  <!-- CUSTOMIZATION MODAL -->
-  <div class="modal-overlay" id="customize-modal">
+      <footer class="personal-footer">
+        <p>Hecho especialmente para ti. 🌼</p>
+      </footer>
+    </div>
+  </section>
+
+  <!-- EDITOR MODAL DE DEDICATORIA PERSONAL -->
+  <div class="modal-overlay" id="editor-modal">
     <div class="modal-box">
-      <h3 class="modal-title">Personaliza tu regalo digital 🌼</h3>
-      <div class="form-group">
-        <label for="input-recipient">Para (Nombre del destinatario)</label>
-        <input type="text" id="input-recipient" placeholder="Ej. Sofía, Mamá, Mi Persona Favorita...">
+      <div class="modal-header">
+        <h3 class="modal-title">Personaliza tu regalo digital 🌼</h3>
+        <button class="btn-close-modal" id="close-modal-x">&times;</button>
       </div>
-      <div class="form-group">
-        <label for="input-message">Tu mensaje especial</label>
-        <textarea id="input-message" rows="4" placeholder="Escribe tu dedicatoria especial..."></textarea>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="edit-recipient">¿Para quién es este regalo?</label>
+          <input type="text" id="edit-recipient" placeholder="Ej. Sofía, Mi persona favorita...">
+        </div>
+
+        <div class="form-group">
+          <label for="edit-sender">Tu nombre (Remitente)</label>
+          <input type="text" id="edit-sender" placeholder="Ej. Mateo, Con cariño...">
+        </div>
+
+        <div class="form-group">
+          <label for="edit-letter">Mensaje de la carta</label>
+          <textarea id="edit-letter" rows="5" placeholder="Escribe aquí tu dedicatoria especial..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Cambiar foto destacada (Opcional)</label>
+          <input type="file" id="edit-photo-input" accept="image/*">
+        </div>
       </div>
-      <div class="form-group">
-        <label for="input-sender">De parte de</label>
-        <input type="text" id="input-sender" placeholder="Ej. Mateo, Con amor...">
-      </div>
-      <div class="modal-actions">
-        <button class="btn-secondary" id="close-modal-btn">Cancelar</button>
-        <button class="btn-cta" id="save-letter-btn">Guardar y Generar Enlace ✨</button>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="close-editor-btn">Cancelar</button>
+        <button class="btn-primary" id="save-editor-btn">Guardar Cambios ✨</button>
       </div>
     </div>
   </div>
