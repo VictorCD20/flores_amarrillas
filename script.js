@@ -162,6 +162,12 @@ function initEditorModal() {
     btnOpen.addEventListener('click', () => modal.classList.add('active'));
   }
 
+  // Open modal if URL has ?edit=true or ?editar=true
+  const urlParams = new URLSearchParams(window.location.search);
+  if ((urlParams.has('edit') || urlParams.has('editar')) && modal) {
+    modal.classList.add('active');
+  }
+
   const closeModal = () => modal.classList.remove('active');
   if (btnClose) btnClose.addEventListener('click', closeModal);
   if (btnCloseX) btnCloseX.addEventListener('click', closeModal);
