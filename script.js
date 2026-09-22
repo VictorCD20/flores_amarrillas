@@ -180,7 +180,7 @@ function initEditorModal() {
   if (btnSave) {
     btnSave.addEventListener('click', () => {
       const recipient = inputRecipient.value.trim() || 'ti';
-      const sender = inputSender.value.trim() || '[Tu nombre]';
+      const sender = inputSender.value.trim();
       const letterText = inputLetter.value.trim();
 
       updateDedicationUI(recipient, sender, letterText);
@@ -188,7 +188,7 @@ function initEditorModal() {
       // Save to URL search params
       const url = new URL(window.location.href);
       url.searchParams.set('para', recipient);
-      url.searchParams.set('de', sender);
+      if (sender) url.searchParams.set('de', sender);
       if (letterText) url.searchParams.set('carta', letterText);
 
       window.history.replaceState({}, '', url);
@@ -205,14 +205,19 @@ function updateDedicationUI(recipient, sender, letterText) {
   const signatureDisplay = document.getElementById('signature-name-display');
   const letterBody = document.getElementById('letter-content-body');
 
-  if (headerTag) {
-    headerTag.innerHTML = `Para <span>${recipient}</span>`;
+  if (headerTag && recipient && recipient !== 'ti') {
+    headerTag.innerHTML = `Para <span>${escapeHTML(recipient)}</span>`;
   }
   if (letterSalutation) {
-    letterSalutation.textContent = `Para ${recipient}:`;
+    letterSalutation.textContent = recipient && recipient !== 'ti' ? `Para ${recipient}:` : 'Para ti:';
   }
   if (signatureDisplay) {
-    signatureDisplay.textContent = sender;
+    if (sender) {
+      signatureDisplay.textContent = sender;
+      signatureDisplay.style.display = 'block';
+    } else {
+      signatureDisplay.style.display = 'none';
+    }
   }
   if (letterText && letterBody) {
     // Split text into paragraphs
